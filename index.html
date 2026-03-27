@@ -7,8 +7,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #4a5d4e; /* Doğal yeşil tonu */
-            --accent-color: #d4a373; /* Toprak tonu */
+            --primary-color: #4a5d4e;
+            --accent-color: #d4a373;
             --bg-color: #fefae0;
             --text-color: #283618;
         }
@@ -24,7 +24,7 @@
 
         header {
             text-align: center;
-            padding: 50px 20px;
+            padding: 40px 20px;
             background-color: #fff;
         }
 
@@ -39,192 +39,251 @@
         .tagline {
             font-style: italic;
             color: var(--accent-color);
-        }
-
-        nav {
-            position: sticky;
-            top: 0;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 15px;
-            text-align: center;
-            z-index: 1000;
-            border-bottom: 1px solid #ddd;
+            font-size: 0.9rem;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1100px;
             margin: auto;
             padding: 20px;
         }
 
+        /* Ürün Kartları */
         .product-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
         }
 
         .product-card {
             background: white;
-            border-radius: 8px;
+            border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            transition: transform 0.3s ease;
+            transition: 0.3s;
             text-align: center;
             padding-bottom: 20px;
+            cursor: pointer;
         }
 
         .product-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         }
 
         .product-card img {
             width: 100%;
-            height: 250px;
+            height: 220px;
             object-fit: cover;
         }
 
         .badge {
             background: var(--primary-color);
             color: white;
-            padding: 5px 10px;
-            font-size: 0.8rem;
+            padding: 4px 12px;
+            font-size: 0.7rem;
             border-radius: 20px;
             display: inline-block;
             margin-top: 15px;
         }
 
-        h3 {
-            font-family: 'Playfair Display', serif;
-            margin: 10px 0;
+        h3 { font-family: 'Playfair Display', serif; margin: 10px 0 5px 0; }
+        .price { color: var(--accent-color); font-weight: 600; margin: 0; }
+
+        /* MODAL (Ürün Detay Penceresi) */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            backdrop-filter: blur(5px);
+            align-items: center;
+            justify-content: center;
         }
 
-        .price {
-            font-weight: 600;
-            color: var(--accent-color);
+        .modal-content {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 600px;
+            width: 90%;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
 
-        .btn-contact {
-            display: inline-block;
+        .close {
+            position: absolute;
+            right: 20px;
+            top: 15px;
+            font-size: 28px;
+            cursor: pointer;
+            color: #999;
+        }
+
+        .modal-body {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .modal-image {
+            flex: 1;
+            min-width: 200px;
+            border-radius: 10px;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .modal-info {
+            flex: 1.5;
+            min-width: 200px;
+        }
+
+        .btn-order {
+            display: block;
             background: var(--primary-color);
             color: white;
-            padding: 12px 25px;
+            padding: 15px;
             text-decoration: none;
-            border-radius: 5px;
-            margin-top: 40px;
-            transition: background 0.3s;
-        }
-
-        .btn-contact:hover {
-            background: var(--text-color);
-        }
-
-        footer {
             text-align: center;
-            padding: 60px 20px;
-            background: #fff;
-            margin-top: 50px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-weight: 600;
         }
 
-        .info-section {
-            text-align: center;
-            margin-bottom: 40px;
-        }
+        footer { text-align: center; padding: 40px; background: #fff; margin-top: 50px; }
     </style>
 </head>
 <body>
 
 <header>
     <h1>KİMYA</h1>
-    <p class="tagline">%100 Doğal • El Yapımı • Saf Bakım</p>
+    <p class="tagline">%100 Doğal • El Yapımı • Saf Kimya</p>
 </header>
 
-<nav>
-    <small>Sipariş ve Ödeme İçin İletişime Geçin</small>
-</nav>
-
 <div class="container">
-    <div class="info-section">
-        <h2>Koleksiyonumuz</h2>
-        <p>Doğanın laboratuvarından, cildinizin ihtiyacı olan en saf formüller.</p>
-    </div>
-
     <div class="product-grid">
-        <!-- El Grubu -->
-        <div class="product-card">
-            <img src="https://images.unsplash.com/photo-1556227702-d1e4e7b5c232?auto=format&fit=crop&q=80&w=400" alt="Hand Cream">
+        <!-- Ürün 1 -->
+        <div class="product-card" onclick="openModal('Kimya Hand Cream', '180 TL', 'Soğuk sıkım zeytinyağı, balmumu ve lavanta uçucu yağı ile el yapımıdır. Sentetik koku içermez.', 'https://images.unsplash.com/photo-1556227702-d1e4e7b5c232?w=500')">
+            <img src="https://images.unsplash.com/photo-1556227702-d1e4e7b5c232?w=400" alt="Hand Cream">
             <span class="badge">EL YAPIMI</span>
             <h3>Kimya Hand Cream</h3>
-            <p>Yoğun nemlendirici formül.</p>
             <p class="price">180 TL</p>
         </div>
-        <div class="product-card">
-            <img src="https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?auto=format&fit=crop&q=80&w=400" alt="Hand Serum">
+
+        <!-- Ürün 2 -->
+        <div class="product-card" onclick="openModal('Kimya Hand Serum', '220 TL', 'Kuşburnu çekirdeği yağı ve E vitamini ile zenginleştirilmiş, el lekeleri için özel formül.', 'https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?w=500')">
+            <img src="https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?w=400" alt="Hand Serum">
             <span class="badge">EL YAPIMI</span>
             <h3>Kimya Hand Serum</h3>
-            <p>Leke karşıtı ve onarıcı.</p>
             <p class="price">220 TL</p>
         </div>
 
-        <!-- Yüz Grubu -->
-        <div class="product-card">
-            <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&q=80&w=400" alt="Face Cream">
+        <!-- Ürün 3 -->
+        <div class="product-card" onclick="openModal('Kimya Face Cream', '350 TL', 'Aloe vera jeli ve jojoba yağı bazıyla hazırlanmış, gözenek tıkamayan gündüz kremi.', 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=500')">
+            <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=400" alt="Face Cream">
             <span class="badge">EL YAPIMI</span>
             <h3>Kimya Face Cream</h3>
-            <p>Gün boyu canlı görünüm.</p>
             <p class="price">350 TL</p>
         </div>
-        <div class="product-card">
-            <img src="https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?auto=format&fit=crop&q=80&w=400" alt="Face Serum">
+
+        <!-- Ürün 4 -->
+        <div class="product-card" onclick="openModal('Kimya Face Serum', '420 TL', 'Hücre yenileyici buhur yağı ve gece onarımı sağlayan %100 saf serum.', 'https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?w=500')">
+            <img src="https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?w=400" alt="Face Serum">
             <span class="badge">EL YAPIMI</span>
             <h3>Kimya Face Serum</h3>
-            <p>Anti-aging etkili kolajen desteği.</p>
             <p class="price">420 TL</p>
         </div>
 
-        <!-- Vücut Grubu -->
-        <div class="product-card">
-            <img src="https://images.unsplash.com/photo-1594125355977-1811503f9a2d?auto=format&fit=crop&q=80&w=400" alt="Body Cream">
+        <!-- Ürün 5 -->
+        <div class="product-card" onclick="openModal('Kimya Body Cream', '290 TL', 'Shea yağı ve Hindistan cevizi yağı ile tüm vücut için derinlemesine besleyici.', 'https://images.unsplash.com/photo-1594125355977-1811503f9a2d?w=500')">
+            <img src="https://images.unsplash.com/photo-1594125355977-1811503f9a2d?w=400" alt="Body Cream">
             <span class="badge">EL YAPIMI</span>
             <h3>Kimya Body Cream</h3>
-            <p>Kadifemsi yumuşaklık.</p>
             <p class="price">290 TL</p>
         </div>
-        <div class="product-card">
-            <img src="https://images.unsplash.com/photo-1608247764146-d7182d63c7e9?auto=format&fit=crop&q=80&w=400" alt="Body Serum">
+
+        <!-- Ürün 6 -->
+        <div class="product-card" onclick="openModal('Kimya Body Serum', '330 TL', 'Portakal ve ardıç yağı ile selülit karşıtı, sıkılaştırıcı masaj serumu.', 'https://images.unsplash.com/photo-1608247764146-d7182d63c7e9?w=500')">
+            <img src="https://images.unsplash.com/photo-1608247764146-d7182d63c7e9?w=400" alt="Body Serum">
             <span class="badge">EL YAPIMI</span>
             <h3>Kimya Body Serum</h3>
-            <p>Sıkılaştırıcı doğal yağlar.</p>
             <p class="price">330 TL</p>
         </div>
 
-        <!-- Saç Grubu -->
-        <div class="product-card">
-            <img src="https://images.unsplash.com/photo-1526947425960-945c6e72858f?auto=format&fit=crop&q=80&w=400" alt="Hair Cream">
+        <!-- Ürün 7 -->
+        <div class="product-card" onclick="openModal('Kimya Hair Cream', '260 TL', 'Argan yağı ve bitkisel keratin ile duş sonrası durulanmayan bakım kremi.', 'https://images.unsplash.com/photo-1526947425960-945c6e72858f?w=500')">
+            <img src="https://images.unsplash.com/photo-1526947425960-945c6e72858f?w=400" alt="Hair Cream">
             <span class="badge">EL YAPIMI</span>
             <h3>Kimya Hair Cream</h3>
-            <p>Kolay tarama ve parlaklık.</p>
             <p class="price">260 TL</p>
         </div>
-        <div class="product-card">
-            <img src="https://images.unsplash.com/photo-1535585209827-a15fcdbc4c2d?auto=format&fit=crop&q=80&w=400" alt="Hair Serum">
+
+        <!-- Ürün 8 -->
+        <div class="product-card" onclick="openModal('Kimya Hair Serum', '310 TL', 'Biberiye ve hint yağı ile dökülme karşıtı, saç kökü canlandırıcı iksir.', 'https://images.unsplash.com/photo-1535585209827-a15fcdbc4c2d?w=500')">
+            <img src="https://images.unsplash.com/photo-1535585209827-a15fcdbc4c2d?w=400" alt="Hair Serum">
             <span class="badge">EL YAPIMI</span>
             <h3>Kimya Hair Serum</h3>
-            <p>Kökten uca besleyici terapi.</p>
             <p class="price">310 TL</p>
         </div>
     </div>
+</div>
 
-    <div style="text-align: center;">
-        <a href="mailto:ornek@proton.me?subject=Sipariş Talebi" class="btn-contact">Sipariş ve Ödeme İçin İletişime Geçin</a>
-        <p><small>*Ücretsiz ve güvenli Proton Mail altyapısı kullanılmaktadır.</small></p>
+<!-- MODAL HTML -->
+<div id="productModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <div class="modal-body">
+            <img id="modalImg" class="modal-image" src="" alt="">
+            <div class="modal-info">
+                <h2 id="modalTitle" style="font-family: 'Playfair Display', serif;"></h2>
+                <p id="modalPrice" class="price" style="font-size: 1.5rem;"></p>
+                <hr style="border: 0; border-top: 1px solid #eee; margin: 15px 0;">
+                <p id="modalDesc"></p>
+                <p style="font-size: 0.8rem; color: #666;"><strong>%100 Doğal İçerik • El Yapımı</strong></p>
+                <a id="mailBtn" href="" class="btn-order">Sipariş İçin E-posta Gönder</a>
+            </div>
+        </div>
     </div>
 </div>
 
 <footer>
-    <p>&copy; 2026 KİMYA - Tüm Hakları Saklıdır.</p>
-    <p>%100 Doğal İçerik | Kimyasal Katkı Maddesi İçermez</p>
+    <p>&copy; 2026 KİMYA | Saf Güzellik</p>
+    <p><small>Sipariş ve teknik destek: <a href="mailto:destek@proton.me">destek@proton.me</a></small></p>
 </footer>
+
+<script>
+    function openModal(title, price, desc, img) {
+        document.getElementById('modalTitle').innerText = title;
+        document.getElementById('modalPrice').innerText = price;
+        document.getElementById('modalDesc').innerText = desc;
+        document.getElementById('modalImg').src = img;
+        
+        // Mail linkini ürün ismiyle güncelle
+        document.getElementById('mailBtn').href = "mailto:siparis@proton.me?subject=Sipariş: " + title;
+        
+        document.getElementById('productModal').style.display = "flex";
+    }
+
+    function closeModal() {
+        document.getElementById('productModal').style.display = "none";
+    }
+
+    // Modal dışına tıklandığında kapatma
+    window.onclick = function(event) {
+        let modal = document.getElementById('productModal');
+        if (event.target == modal) {
+            closeModal();
+        }
+    }
+</script>
 
 </body>
 </html>
